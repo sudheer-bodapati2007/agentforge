@@ -1,0 +1,828 @@
+12/35 passed, 23 failed, 0 errors
+
+tests.test_reference_validation::test_normalises_valid_input
+ValueError: username is invalid
+def test_normalises_valid_input():
+>       result = validate_registration(valid(username="  Alice_1 ", email=" Alice@Example.COM "))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_reference_validation.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': '  Alice_1 ', 'email': ' Alice@Example.COM ', 'age': 30}
+
+    def validate_registration(data: Dict) -> Dict:
+        if not isinstance(data, dict):
+            raise TypeError('data must be a dictionary')
+    
+        username = data.get('username')
+        email = data.get('email')
+        age = data.get('age')
+    
+        if username is None:
+            raise ValueError('username is missing')
+        if not (3 <= len(username.strip()) <= 20) or not username.strip().isalnum() or '_' not in username.strip():
+>           raise ValueError('username is invalid')
+E           ValueError: username is invalid
+
+app/validation.py:16: ValueError
+
+tests.test_reference_validation::test_does_not_modify_the_input
+ValueError: username is invalid
+def test_does_not_modify_the_input():
+        data = valid(username=" Bob_2 ")
+>       validate_registration(data)
+
+tests/test_reference_validation.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': ' Bob_2 ', 'email': 'alice@example.com', 'age': 30}
+
+    def validate_registration(data: Dict) -> Dict:
+        if not isinstance(data, dict):
+            raise TypeError('data must be a dictionary')
+    
+        username = data.get('username')
+        email = data.get('email')
+        age = data.get('age')
+    
+        if username is None:
+            raise ValueError('username is missing')
+        if not (3 <= len(username.strip()) <= 20) or not username.strip().isalnum() or '_' not in username.strip():
+>           raise ValueError('username is invalid')
+E           ValueError: username is invalid
+
+app/validation.py:16: ValueError
+
+tests.test_reference_validation::test_username_length_boundaries_are_accepted[abc]
+ValueError: username is invalid
+username = 'abc'
+
+    @pytest.mark.parametrize("username", ["abc", "a" * 20])
+    def test_username_length_boundaries_are_accepted(username):
+>       assert validate_registration(valid(username=username))["username"] == username
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_reference_validation.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'abc', 'email': 'alice@example.com', 'age': 30}
+
+    def validate_registration(data: Dict) -> Dict:
+        if not isinstance(data, dict):
+            raise TypeError('data must be a dictionary')
+    
+        username = data.get('username')
+        email = data.get('email')
+        age = data.get('age')
+    
+        if username is None:
+            raise ValueError('username is missing')
+        if not (3 <= len(username.strip()) <= 20) or not username.strip().isalnum() or '_' not in username.strip():
+>           raise ValueError('username is invalid')
+E           ValueError: username is invalid
+
+app/validation.py:16: ValueError
+
+tests.test_reference_validation::test_username_length_boundaries_are_accepted[aaaaaaaaaaaaaaaaaaaa]
+ValueError: username is invalid
+username = 'aaaaaaaaaaaaaaaaaaaa'
+
+    @pytest.mark.parametrize("username", ["abc", "a" * 20])
+    def test_username_length_boundaries_are_accepted(username):
+>       assert validate_registration(valid(username=username))["username"] == username
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_reference_validation.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'aaaaaaaaaaaaaaaaaaaa', 'email': 'alice@example.com', 'age': 30}
+
+    def validate_registration(data: Dict) -> Dict:
+        if not isinstance(data, dict):
+            raise TypeError('data must be a dictionary')
+    
+        username = data.get('username')
+        email = data.get('email')
+        age = data.get('age')
+    
+        if username is None:
+            raise ValueError('username is missing')
+        if not (3 <= len(username.strip()) <= 20) or not username.strip().isalnum() or '_' not in username.strip():
+>           raise ValueError('username is invalid')
+E           ValueError: username is invalid
+
+app/validation.py:16: ValueError
+
+tests.test_reference_validation::test_invalid_email[no-at-sign]
+AssertionError: Regex pattern did not match.
+  Expected regex: re.compile('(?i)email', re.IGNORECASE)
+  Actual message: 'username is invalid'
+email = 'no-at-sign'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:36: AssertionError
+
+tests.test_reference_validation::test_invalid_email[a@@b.com]
+AssertionError: Regex pattern did not match.
+  Expected regex: re.compile('(?i)email', re.IGNORECASE)
+  Actual message: 'username is invalid'
+email = 'a@@b.com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:36: AssertionError
+
+tests.test_reference_validation::test_invalid_email[@b.com]
+AssertionError: Regex pattern did not match.
+  Expected regex: re.compile('(?i)email', re.IGNORECASE)
+  Actual message: 'username is invalid'
+email = '@b.com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:36: AssertionError
+
+tests.test_reference_validation::test_invalid_email[a@.com]
+AssertionError: Regex pattern did not match.
+  Expected regex: re.compile('(?i)email', re.IGNORECASE)
+  Actual message: 'username is invalid'
+email = 'a@.com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:36: AssertionError
+
+tests.test_reference_validation::test_invalid_email[a@com.]
+AssertionError: Regex pattern did not match.
+  Expected regex: re.compile('(?i)email', re.IGNORECASE)
+  Actual message: 'username is invalid'
+email = 'a@com.'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:36: AssertionError
+
+tests.test_reference_validation::test_invalid_email[a@com]
+AssertionError: Regex pattern did not match.
+  Expected regex: re.compile('(?i)email', re.IGNORECASE)
+  Actual message: 'username is invalid'
+email = 'a@com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:36: AssertionError
+
+tests.test_reference_validation::test_invalid_email[a@b@c.com]
+AssertionError: Regex pattern did not match.
+  Expected regex: re.compile('(?i)email', re.IGNORECASE)
+  Actual message: 'username is invalid'
+email = 'a@b@c.com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:36: AssertionError
+
+tests.test_reference_validation::test_short_valid_email
+ValueError: username is invalid
+def test_short_valid_email():
+>       assert validate_registration(valid(email="a@b.c"))["email"] == "a@b.c"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_reference_validation.py:41: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'a@b.c', 'age': 30}
+
+    def validate_registration(data: Dict) -> Dict:
+        if not isinstance(data, dict):
+            raise TypeError('data must be a dictionary')
+    
+        username = data.get('username')
+        email = data.get('email')
+        age = data.get('age')
+    
+        if username is None:
+            raise ValueError('username is missing')
+        if not (3 <= len(username.strip()) <= 20) or not username.strip().isalnum() or '_' not in username.strip():
+>           raise ValueError('username is invalid')
+E           ValueError: username is invalid
+
+app/validation.py:16: ValueError
+
+tests.test_reference_validation::test_age_boundaries_are_accepted[13]
+ValueError: username is invalid
+age = 13
+
+    @pytest.mark.parametrize("age", [13, 120])
+    def test_age_boundaries_are_accepted(age):
+>       assert validate_registration(valid(age=age))["age"] == age
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_reference_validation.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': 13}
+
+    def validate_registration(data: Dict) -> Dict:
+        if not isinstance(data, dict):
+            raise TypeError('data must be a dictionary')
+    
+        username = data.get('username')
+        email = data.get('email')
+        age = data.get('age')
+    
+        if username is None:
+            raise ValueError('username is missing')
+        if not (3 <= len(username.strip()) <= 20) or not username.strip().isalnum() or '_' not in username.strip():
+>           raise ValueError('username is invalid')
+E           ValueError: username is invalid
+
+app/validation.py:16: ValueError
+
+tests.test_reference_validation::test_age_boundaries_are_accepted[120]
+ValueError: username is invalid
+age = 120
+
+    @pytest.mark.parametrize("age", [13, 120])
+    def test_age_boundaries_are_accepted(age):
+>       assert validate_registration(valid(age=age))["age"] == age
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_reference_validation.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': 120}
+
+    def validate_registration(data: Dict) -> Dict:
+        if not isinstance(data, dict):
+            raise TypeError('data must be a dictionary')
+    
+        username = data.get('username')
+        email = data.get('email')
+        age = data.get('age')
+    
+        if username is None:
+            raise ValueError('username is missing')
+        if not (3 <= len(username.strip()) <= 20) or not username.strip().isalnum() or '_' not in username.strip():
+>           raise ValueError('username is invalid')
+E           ValueError: username is invalid
+
+app/validation.py:16: ValueError
+
+tests.test_reference_validation::test_invalid_age[12]
+AssertionError: Regex pattern did not match.
+  Expected regex: re.compile('(?i)age', re.IGNORECASE)
+  Actual message: 'username is invalid'
+age = 12
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+>       with pytest.raises(ValueError, match="(?i)age"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)age', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:51: AssertionError
+
+tests.test_reference_validation::test_invalid_age[121]
+AssertionError: Regex pattern did not match.
+  Expected regex: re.compile('(?i)age', re.IGNORECASE)
+  Actual message: 'username is invalid'
+age = 121
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+>       with pytest.raises(ValueError, match="(?i)age"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)age', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:51: AssertionError
+
+tests.test_reference_validation::test_invalid_age[-1]
+AssertionError: Regex pattern did not match.
+  Expected regex: re.compile('(?i)age', re.IGNORECASE)
+  Actual message: 'username is invalid'
+age = -1
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+>       with pytest.raises(ValueError, match="(?i)age"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)age', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:51: AssertionError
+
+tests.test_reference_validation::test_invalid_age[30]
+AssertionError: Regex pattern did not match.
+  Expected regex: re.compile('(?i)age', re.IGNORECASE)
+  Actual message: 'username is invalid'
+age = '30'
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+>       with pytest.raises(ValueError, match="(?i)age"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)age', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:51: AssertionError
+
+tests.test_reference_validation::test_invalid_age[30.5]
+AssertionError: Regex pattern did not match.
+  Expected regex: re.compile('(?i)age', re.IGNORECASE)
+  Actual message: 'username is invalid'
+age = 30.5
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+>       with pytest.raises(ValueError, match="(?i)age"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)age', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:51: AssertionError
+
+tests.test_reference_validation::test_invalid_age[True]
+AssertionError: Regex pattern did not match.
+  Expected regex: re.compile('(?i)age', re.IGNORECASE)
+  Actual message: 'username is invalid'
+age = True
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+>       with pytest.raises(ValueError, match="(?i)age"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)age', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:51: AssertionError
+
+tests.test_reference_validation::test_invalid_age[None]
+AssertionError: Regex pattern did not match.
+  Expected regex: re.compile('(?i)age', re.IGNORECASE)
+  Actual message: 'username is invalid'
+age = None
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+>       with pytest.raises(ValueError, match="(?i)age"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)age', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:51: AssertionError
+
+tests.test_reference_validation::test_missing_key[email]
+AssertionError: Regex pattern did not match.
+  Expected regex: re.compile('(?i)email', re.IGNORECASE)
+  Actual message: 'username is invalid'
+missing = 'email'
+
+    @pytest.mark.parametrize("missing", ["username", "email", "age"])
+    def test_missing_key(missing):
+        data = valid()
+        del data[missing]
+>       with pytest.raises(ValueError, match=f"(?i){missing}"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:59: AssertionError
+
+tests.test_reference_validation::test_missing_key[age]
+AssertionError: Regex pattern did not match.
+  Expected regex: re.compile('(?i)age', re.IGNORECASE)
+  Actual message: 'username is invalid'
+missing = 'age'
+
+    @pytest.mark.parametrize("missing", ["username", "email", "age"])
+    def test_missing_key(missing):
+        data = valid()
+        del data[missing]
+>       with pytest.raises(ValueError, match=f"(?i){missing}"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)age', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:59: AssertionError
+
+--- output (tail) ---
+t isinstance(data, dict):
+            raise TypeError('data must be a dictionary')
+    
+        username = data.get('username')
+        email = data.get('email')
+        age = data.get('age')
+    
+        if username is None:
+            raise ValueError('username is missing')
+        if not (3 <= len(username.strip()) <= 20) or not username.strip().isalnum() or '_' not in username.strip():
+>           raise ValueError('username is invalid')
+E           ValueError: username is invalid
+
+app/validation.py:16: ValueError
+______ test_username_length_boundaries_are_accepted[aaaaaaaaaaaaaaaaaaaa] ______
+
+username = 'aaaaaaaaaaaaaaaaaaaa'
+
+    @pytest.mark.parametrize("username", ["abc", "a" * 20])
+    def test_username_length_boundaries_are_accepted(username):
+>       assert validate_registration(valid(username=username))["username"] == username
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_reference_validation.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'aaaaaaaaaaaaaaaaaaaa', 'email': 'alice@example.com', 'age': 30}
+
+    def validate_registration(data: Dict) -> Dict:
+        if not isinstance(data, dict):
+            raise TypeError('data must be a dictionary')
+    
+        username = data.get('username')
+        email = data.get('email')
+        age = data.get('age')
+    
+        if username is None:
+            raise ValueError('username is missing')
+        if not (3 <= len(username.strip()) <= 20) or not username.strip().isalnum() or '_' not in username.strip():
+>           raise ValueError('username is invalid')
+E           ValueError: username is invalid
+
+app/validation.py:16: ValueError
+________________________ test_invalid_email[no-at-sign] ________________________
+
+email = 'no-at-sign'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:36: AssertionError
+_________________________ test_invalid_email[a@@b.com] _________________________
+
+email = 'a@@b.com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:36: AssertionError
+__________________________ test_invalid_email[@b.com] __________________________
+
+email = '@b.com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:36: AssertionError
+__________________________ test_invalid_email[a@.com] __________________________
+
+email = 'a@.com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:36: AssertionError
+__________________________ test_invalid_email[a@com.] __________________________
+
+email = 'a@com.'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:36: AssertionError
+__________________________ test_invalid_email[a@com] ___________________________
+
+email = 'a@com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:36: AssertionError
+________________________ test_invalid_email[a@b@c.com] _________________________
+
+email = 'a@b@c.com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:36: AssertionError
+____________________________ test_short_valid_email ____________________________
+
+    def test_short_valid_email():
+>       assert validate_registration(valid(email="a@b.c"))["email"] == "a@b.c"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_reference_validation.py:41: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'a@b.c', 'age': 30}
+
+    def validate_registration(data: Dict) -> Dict:
+        if not isinstance(data, dict):
+            raise TypeError('data must be a dictionary')
+    
+        username = data.get('username')
+        email = data.get('email')
+        age = data.get('age')
+    
+        if username is None:
+            raise ValueError('username is missing')
+        if not (3 <= len(username.strip()) <= 20) or not username.strip().isalnum() or '_' not in username.strip():
+>           raise ValueError('username is invalid')
+E           ValueError: username is invalid
+
+app/validation.py:16: ValueError
+_____________________ test_age_boundaries_are_accepted[13] _____________________
+
+age = 13
+
+    @pytest.mark.parametrize("age", [13, 120])
+    def test_age_boundaries_are_accepted(age):
+>       assert validate_registration(valid(age=age))["age"] == age
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_reference_validation.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': 13}
+
+    def validate_registration(data: Dict) -> Dict:
+        if not isinstance(data, dict):
+            raise TypeError('data must be a dictionary')
+    
+        username = data.get('username')
+        email = data.get('email')
+        age = data.get('age')
+    
+        if username is None:
+            raise ValueError('username is missing')
+        if not (3 <= len(username.strip()) <= 20) or not username.strip().isalnum() or '_' not in username.strip():
+>           raise ValueError('username is invalid')
+E           ValueError: username is invalid
+
+app/validation.py:16: ValueError
+____________________ test_age_boundaries_are_accepted[120] _____________________
+
+age = 120
+
+    @pytest.mark.parametrize("age", [13, 120])
+    def test_age_boundaries_are_accepted(age):
+>       assert validate_registration(valid(age=age))["age"] == age
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_reference_validation.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': 120}
+
+    def validate_registration(data: Dict) -> Dict:
+        if not isinstance(data, dict):
+            raise TypeError('data must be a dictionary')
+    
+        username = data.get('username')
+        email = data.get('email')
+        age = data.get('age')
+    
+        if username is None:
+            raise ValueError('username is missing')
+        if not (3 <= len(username.strip()) <= 20) or not username.strip().isalnum() or '_' not in username.strip():
+>           raise ValueError('username is invalid')
+E           ValueError: username is invalid
+
+app/validation.py:16: ValueError
+_____________________________ test_invalid_age[12] _____________________________
+
+age = 12
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+>       with pytest.raises(ValueError, match="(?i)age"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)age', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:51: AssertionError
+____________________________ test_invalid_age[121] _____________________________
+
+age = 121
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+>       with pytest.raises(ValueError, match="(?i)age"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)age', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:51: AssertionError
+_____________________________ test_invalid_age[-1] _____________________________
+
+age = -1
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+>       with pytest.raises(ValueError, match="(?i)age"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)age', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:51: AssertionError
+_____________________________ test_invalid_age[30] _____________________________
+
+age = '30'
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+>       with pytest.raises(ValueError, match="(?i)age"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)age', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:51: AssertionError
+____________________________ test_invalid_age[30.5] ____________________________
+
+age = 30.5
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+>       with pytest.raises(ValueError, match="(?i)age"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)age', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:51: AssertionError
+____________________________ test_invalid_age[True] ____________________________
+
+age = True
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+>       with pytest.raises(ValueError, match="(?i)age"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)age', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:51: AssertionError
+____________________________ test_invalid_age[None] ____________________________
+
+age = None
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+>       with pytest.raises(ValueError, match="(?i)age"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)age', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:51: AssertionError
+___________________________ test_missing_key[email] ____________________________
+
+missing = 'email'
+
+    @pytest.mark.parametrize("missing", ["username", "email", "age"])
+    def test_missing_key(missing):
+        data = valid()
+        del data[missing]
+>       with pytest.raises(ValueError, match=f"(?i){missing}"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:59: AssertionError
+____________________________ test_missing_key[age] _____________________________
+
+missing = 'age'
+
+    @pytest.mark.parametrize("missing", ["username", "email", "age"])
+    def test_missing_key(missing):
+        data = valid()
+        del data[missing]
+>       with pytest.raises(ValueError, match=f"(?i){missing}"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)age', re.IGNORECASE)
+E         Actual message: 'username is invalid'
+
+tests/test_reference_validation.py:59: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_reference_validation.py::test_normalises_valid_input - Valu...
+FAILED tests/test_reference_validation.py::test_does_not_modify_the_input - V...
+FAILED tests/test_reference_validation.py::test_username_length_boundaries_are_accepted[abc]
+FAILED tests/test_reference_validation.py::test_username_length_boundaries_are_accepted[aaaaaaaaaaaaaaaaaaaa]
+FAILED tests/test_reference_validation.py::test_invalid_email[no-at-sign] - A...
+FAILED tests/test_reference_validation.py::test_invalid_email[a@@b.com] - Ass...
+FAILED tests/test_reference_validation.py::test_invalid_email[@b.com] - Asser...
+FAILED tests/test_reference_validation.py::test_invalid_email[a@.com] - Asser...
+FAILED tests/test_reference_validation.py::test_invalid_email[a@com.] - Asser...
+FAILED tests/test_reference_validation.py::test_invalid_email[a@com] - Assert...
+FAILED tests/test_reference_validation.py::test_invalid_email[a@b@c.com] - As...
+FAILED tests/test_reference_validation.py::test_short_valid_email - ValueErro...
+FAILED tests/test_reference_validation.py::test_age_boundaries_are_accepted[13]
+FAILED tests/test_reference_validation.py::test_age_boundaries_are_accepted[120]
+FAILED tests/test_reference_validation.py::test_invalid_age[12] - AssertionEr...
+FAILED tests/test_reference_validation.py::test_invalid_age[121] - AssertionE...
+FAILED tests/test_reference_validation.py::test_invalid_age[-1] - AssertionEr...
+FAILED tests/test_reference_validation.py::test_invalid_age[30] - AssertionEr...
+FAILED tests/test_reference_validation.py::test_invalid_age[30.5] - Assertion...
+FAILED tests/test_reference_validation.py::test_invalid_age[True] - Assertion...
+FAILED tests/test_reference_validation.py::test_invalid_age[None] - Assertion...
+FAILED tests/test_reference_validation.py::test_missing_key[email] - Assertio...
+FAILED tests/test_reference_validation.py::test_missing_key[age] - AssertionE...
+23 failed, 12 passed in 2.27s

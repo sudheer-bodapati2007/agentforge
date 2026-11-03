@@ -1,0 +1,31 @@
+﻿benchmark phase5-regression-qwen7b: 6 task(s) x 2 system(s)
+  rest_api          multi_agent   reference 8/11  own 3/7  debug 3  155s  tokens 23329
+  rest_api          single_agent  reference 9/11  own 5/7  debug 0  29s  tokens 1433
+  input_validation  multi_agent   reference 33/35  own 9/9  debug 1  100s  tokens 14123
+.\.venv\Scripts\python.exe : WARNING:agentforge.llm:llm task=single_agent attempt=1 failed: ResponseError: prediction 
+aborted, token repeat limit reached (status code: -1)
+At line:1 char:406
++ ...  = "utf-8"; .\.venv\Scripts\python.exe ..\evals\scripts\run_benchmark ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING:agentfo...tatus code: -1):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  input_validation  single_agent  reference 33/35  own 1/8  debug 0  36s  tokens 1611
+  crud              multi_agent   reference 11/14  own 16/16  debug 2  155s  tokens 22634
+  crud              single_agent  reference 13/14  own 10/10  debug 0  33s  tokens 1499
+  fix_bug           multi_agent   reference 8/8 SOLVED  own 5/5  debug 0  73s  tokens 8284
+  fix_bug           single_agent  reference 8/8 SOLVED  own 4/4  debug 0  15s  tokens 834
+  write_tests       multi_agent   reference 11/11 SOLVED  own 5/8  debug 3  107s  tokens 15834
+  write_tests       single_agent  reference 0/1  own 0/1  debug 0  12s  tokens 738
+WARNING:agentforge.llm:llm task=tester attempt=1 failed: ResponseError: prediction aborted, token repeat limit reached 
+(status code: -1)
+WARNING:agentforge.llm:llm task=tester attempt=2 failed: ResponseError: prediction aborted, token repeat limit reached 
+(status code: -1)
+  add_auth          multi_agent   reference 5/9  own 4/9  debug 3  182s  tokens 23184
+  add_auth          single_agent  reference 1/9  own 1/7  debug 0  29s  tokens 1453
+
+summary
+  multi_agent   solved 2/6 (33%)  reference pass 84%  own suite green 50%  median 131s  tokens 107388  errors 0
+  single_agent  solved 1/6 (17%)  reference pass 63%  own suite green 33%  median 29s  tokens 7568  errors 0
+
+report: C:\Users\poorn\OneDrive\Desktop\Project_claude\evals\reports\phase5-regression-qwen7b.json

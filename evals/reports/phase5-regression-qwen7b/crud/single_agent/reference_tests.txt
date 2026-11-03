@@ -1,0 +1,37 @@
+13/14 passed, 1 failed, 0 errors
+
+tests.test_reference_todos::test_blank_title_on_update_keeps_old_title
+AssertionError: assert '' == 'keep'
+  
+  - keep
+def test_blank_title_on_update_keeps_old_title():
+        store = TodoStore()
+        todo = store.add("keep")
+        with pytest.raises(ValueError):
+            store.update(todo["id"], title="  ")
+>       assert store.get(todo["id"])["title"] == "keep"
+E       AssertionError: assert '' == 'keep'
+E         
+E         - keep
+
+tests/test_reference_todos.py:75: AssertionError
+
+--- output (tail) ---
+............F.                                                           [100%]
+=================================== FAILURES ===================================
+__________________ test_blank_title_on_update_keeps_old_title __________________
+
+    def test_blank_title_on_update_keeps_old_title():
+        store = TodoStore()
+        todo = store.add("keep")
+        with pytest.raises(ValueError):
+            store.update(todo["id"], title="  ")
+>       assert store.get(todo["id"])["title"] == "keep"
+E       AssertionError: assert '' == 'keep'
+E         
+E         - keep
+
+tests/test_reference_todos.py:75: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_reference_todos.py::test_blank_title_on_update_keeps_old_title
+1 failed, 13 passed in 1.05s

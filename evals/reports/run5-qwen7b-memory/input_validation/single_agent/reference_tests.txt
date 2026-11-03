@@ -1,0 +1,31 @@
+0/1 passed, 0 failed, 1 errors
+
+tests.test_reference_validation
+collection failure
+ImportError while importing test module '/workspace/tests/test_reference_validation.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/local/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_reference_validation.py:5: in <module>
+    from app.validation import validate_registration
+E   ModuleNotFoundError: No module named 'app'
+
+--- output (tail) ---
+
+==================================== ERRORS ====================================
+_____________ ERROR collecting tests/test_reference_validation.py ______________
+ImportError while importing test module '/workspace/tests/test_reference_validation.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/local/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_reference_validation.py:5: in <module>
+    from app.validation import validate_registration
+E   ModuleNotFoundError: No module named 'app'
+=========================== short test summary info ============================
+ERROR tests/test_reference_validation.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.10s

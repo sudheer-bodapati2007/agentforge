@@ -1,0 +1,1203 @@
+6/35 passed, 29 failed, 0 errors
+
+tests.test_reference_validation::test_normalises_valid_input
+TypeError: Username must contain only alphanumeric characters
+def test_normalises_valid_input():
+>       result = validate_registration(valid(username="  Alice_1 ", email=" Alice@Example.COM "))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_reference_validation.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': '  Alice_1 ', 'email': ' Alice@Example.COM ', 'age': 30}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_does_not_modify_the_input
+TypeError: Username must contain only alphanumeric characters
+def test_does_not_modify_the_input():
+        data = valid(username=" Bob_2 ")
+>       validate_registration(data)
+
+tests/test_reference_validation.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': ' Bob_2 ', 'email': 'alice@example.com', 'age': 30}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_invalid_username[ab]
+AssertionError: Regex pattern did not match.
+  Expected regex: 'username'
+  Actual message: 'Username must be between 3 and 20 characters long'
+username = 'ab'
+
+    @pytest.mark.parametrize("username", ["ab", "a" * 21, "bad name", "bad-name", "", "   "])
+    def test_invalid_username(username):
+>       with pytest.raises(ValueError, match="username"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'username'
+E         Actual message: 'Username must be between 3 and 20 characters long'
+
+tests/test_reference_validation.py:30: AssertionError
+
+tests.test_reference_validation::test_invalid_username[aaaaaaaaaaaaaaaaaaaaa]
+AssertionError: Regex pattern did not match.
+  Expected regex: 'username'
+  Actual message: 'Username must be between 3 and 20 characters long'
+username = 'aaaaaaaaaaaaaaaaaaaaa'
+
+    @pytest.mark.parametrize("username", ["ab", "a" * 21, "bad name", "bad-name", "", "   "])
+    def test_invalid_username(username):
+>       with pytest.raises(ValueError, match="username"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'username'
+E         Actual message: 'Username must be between 3 and 20 characters long'
+
+tests/test_reference_validation.py:30: AssertionError
+
+tests.test_reference_validation::test_invalid_username[bad name]
+TypeError: Username must contain only alphanumeric characters
+username = 'bad name'
+
+    @pytest.mark.parametrize("username", ["ab", "a" * 21, "bad name", "bad-name", "", "   "])
+    def test_invalid_username(username):
+        with pytest.raises(ValueError, match="username"):
+>           validate_registration(valid(username=username))
+
+tests/test_reference_validation.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'bad name', 'email': 'alice@example.com', 'age': 30}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_invalid_username[bad-name]
+TypeError: Username must contain only alphanumeric characters
+username = 'bad-name'
+
+    @pytest.mark.parametrize("username", ["ab", "a" * 21, "bad name", "bad-name", "", "   "])
+    def test_invalid_username(username):
+        with pytest.raises(ValueError, match="username"):
+>           validate_registration(valid(username=username))
+
+tests/test_reference_validation.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'bad-name', 'email': 'alice@example.com', 'age': 30}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_invalid_username[]
+AssertionError: Regex pattern did not match.
+  Expected regex: 'username'
+  Actual message: 'Username is required'
+username = ''
+
+    @pytest.mark.parametrize("username", ["ab", "a" * 21, "bad name", "bad-name", "", "   "])
+    def test_invalid_username(username):
+>       with pytest.raises(ValueError, match="username"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'username'
+E         Actual message: 'Username is required'
+
+tests/test_reference_validation.py:30: AssertionError
+
+tests.test_reference_validation::test_invalid_username[   ]
+AssertionError: Regex pattern did not match.
+  Expected regex: 'username'
+  Actual message: 'Username is required'
+username = '   '
+
+    @pytest.mark.parametrize("username", ["ab", "a" * 21, "bad name", "bad-name", "", "   "])
+    def test_invalid_username(username):
+>       with pytest.raises(ValueError, match="username"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'username'
+E         Actual message: 'Username is required'
+
+tests/test_reference_validation.py:30: AssertionError
+
+tests.test_reference_validation::test_invalid_email[no-at-sign]
+TypeError: Username must contain only alphanumeric characters
+email = 'no-at-sign'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+        with pytest.raises(ValueError, match="email"):
+>           validate_registration(valid(email=email))
+
+tests/test_reference_validation.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'no-at-sign', 'age': 30}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_invalid_email[a@@b.com]
+TypeError: Username must contain only alphanumeric characters
+email = 'a@@b.com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+        with pytest.raises(ValueError, match="email"):
+>           validate_registration(valid(email=email))
+
+tests/test_reference_validation.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'a@@b.com', 'age': 30}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_invalid_email[@b.com]
+TypeError: Username must contain only alphanumeric characters
+email = '@b.com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+        with pytest.raises(ValueError, match="email"):
+>           validate_registration(valid(email=email))
+
+tests/test_reference_validation.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': '@b.com', 'age': 30}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_invalid_email[a@.com]
+TypeError: Username must contain only alphanumeric characters
+email = 'a@.com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+        with pytest.raises(ValueError, match="email"):
+>           validate_registration(valid(email=email))
+
+tests/test_reference_validation.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'a@.com', 'age': 30}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_invalid_email[a@com.]
+TypeError: Username must contain only alphanumeric characters
+email = 'a@com.'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+        with pytest.raises(ValueError, match="email"):
+>           validate_registration(valid(email=email))
+
+tests/test_reference_validation.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'a@com.', 'age': 30}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_invalid_email[a@com]
+TypeError: Username must contain only alphanumeric characters
+email = 'a@com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+        with pytest.raises(ValueError, match="email"):
+>           validate_registration(valid(email=email))
+
+tests/test_reference_validation.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'a@com', 'age': 30}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_invalid_email[a@b@c.com]
+TypeError: Username must contain only alphanumeric characters
+email = 'a@b@c.com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+        with pytest.raises(ValueError, match="email"):
+>           validate_registration(valid(email=email))
+
+tests/test_reference_validation.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'a@b@c.com', 'age': 30}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_short_valid_email
+TypeError: Username must contain only alphanumeric characters
+def test_short_valid_email():
+>       assert validate_registration(valid(email="a@b.c"))["email"] == "a@b.c"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_reference_validation.py:41: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'a@b.c', 'age': 30}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_age_boundaries_are_accepted[13]
+TypeError: Username must contain only alphanumeric characters
+age = 13
+
+    @pytest.mark.parametrize("age", [13, 120])
+    def test_age_boundaries_are_accepted(age):
+>       assert validate_registration(valid(age=age))["age"] == age
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_reference_validation.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': 13}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_age_boundaries_are_accepted[120]
+TypeError: Username must contain only alphanumeric characters
+age = 120
+
+    @pytest.mark.parametrize("age", [13, 120])
+    def test_age_boundaries_are_accepted(age):
+>       assert validate_registration(valid(age=age))["age"] == age
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_reference_validation.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': 120}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_invalid_age[12]
+TypeError: Username must contain only alphanumeric characters
+age = 12
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+        with pytest.raises(ValueError, match="age"):
+>           validate_registration(valid(age=age))
+
+tests/test_reference_validation.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': 12}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_invalid_age[121]
+TypeError: Username must contain only alphanumeric characters
+age = 121
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+        with pytest.raises(ValueError, match="age"):
+>           validate_registration(valid(age=age))
+
+tests/test_reference_validation.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': 121}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_invalid_age[-1]
+TypeError: Username must contain only alphanumeric characters
+age = -1
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+        with pytest.raises(ValueError, match="age"):
+>           validate_registration(valid(age=age))
+
+tests/test_reference_validation.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': -1}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_invalid_age[30]
+TypeError: Username must contain only alphanumeric characters
+age = '30'
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+        with pytest.raises(ValueError, match="age"):
+>           validate_registration(valid(age=age))
+
+tests/test_reference_validation.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': '30'}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_invalid_age[30.5]
+TypeError: Username must contain only alphanumeric characters
+age = 30.5
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+        with pytest.raises(ValueError, match="age"):
+>           validate_registration(valid(age=age))
+
+tests/test_reference_validation.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': 30.5}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_invalid_age[True]
+TypeError: Username must contain only alphanumeric characters
+age = True
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+        with pytest.raises(ValueError, match="age"):
+>           validate_registration(valid(age=age))
+
+tests/test_reference_validation.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': True}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_invalid_age[None]
+TypeError: Username must contain only alphanumeric characters
+age = None
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+        with pytest.raises(ValueError, match="age"):
+>           validate_registration(valid(age=age))
+
+tests/test_reference_validation.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': None}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_missing_key[username]
+AssertionError: Regex pattern did not match.
+  Expected regex: 'username'
+  Actual message: 'Username is required'
+missing = 'username'
+
+    @pytest.mark.parametrize("missing", ["username", "email", "age"])
+    def test_missing_key(missing):
+        data = valid()
+        del data[missing]
+>       with pytest.raises(ValueError, match=missing):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'username'
+E         Actual message: 'Username is required'
+
+tests/test_reference_validation.py:59: AssertionError
+
+tests.test_reference_validation::test_missing_key[email]
+TypeError: Username must contain only alphanumeric characters
+missing = 'email'
+
+    @pytest.mark.parametrize("missing", ["username", "email", "age"])
+    def test_missing_key(missing):
+        data = valid()
+        del data[missing]
+        with pytest.raises(ValueError, match=missing):
+>           validate_registration(data)
+
+tests/test_reference_validation.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'age': 30}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_missing_key[age]
+TypeError: Username must contain only alphanumeric characters
+missing = 'age'
+
+    @pytest.mark.parametrize("missing", ["username", "email", "age"])
+    def test_missing_key(missing):
+        data = valid()
+        del data[missing]
+        with pytest.raises(ValueError, match=missing):
+>           validate_registration(data)
+
+tests/test_reference_validation.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com'}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+
+tests.test_reference_validation::test_first_invalid_field_is_reported
+AssertionError: Regex pattern did not match.
+  Expected regex: 'username'
+  Actual message: 'Username must be between 3 and 20 characters long'
+def test_first_invalid_field_is_reported():
+>       with pytest.raises(ValueError, match="username"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'username'
+E         Actual message: 'Username must be between 3 and 20 characters long'
+
+tests/test_reference_validation.py:64: AssertionError
+
+--- output (tail) ---
+rname must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+____________________ test_age_boundaries_are_accepted[120] _____________________
+
+age = 120
+
+    @pytest.mark.parametrize("age", [13, 120])
+    def test_age_boundaries_are_accepted(age):
+>       assert validate_registration(valid(age=age))["age"] == age
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_reference_validation.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': 120}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+_____________________________ test_invalid_age[12] _____________________________
+
+age = 12
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+        with pytest.raises(ValueError, match="age"):
+>           validate_registration(valid(age=age))
+
+tests/test_reference_validation.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': 12}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+____________________________ test_invalid_age[121] _____________________________
+
+age = 121
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+        with pytest.raises(ValueError, match="age"):
+>           validate_registration(valid(age=age))
+
+tests/test_reference_validation.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': 121}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+_____________________________ test_invalid_age[-1] _____________________________
+
+age = -1
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+        with pytest.raises(ValueError, match="age"):
+>           validate_registration(valid(age=age))
+
+tests/test_reference_validation.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': -1}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+_____________________________ test_invalid_age[30] _____________________________
+
+age = '30'
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+        with pytest.raises(ValueError, match="age"):
+>           validate_registration(valid(age=age))
+
+tests/test_reference_validation.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': '30'}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+____________________________ test_invalid_age[30.5] ____________________________
+
+age = 30.5
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+        with pytest.raises(ValueError, match="age"):
+>           validate_registration(valid(age=age))
+
+tests/test_reference_validation.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': 30.5}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+____________________________ test_invalid_age[True] ____________________________
+
+age = True
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+        with pytest.raises(ValueError, match="age"):
+>           validate_registration(valid(age=age))
+
+tests/test_reference_validation.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': True}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+____________________________ test_invalid_age[None] ____________________________
+
+age = None
+
+    @pytest.mark.parametrize("age", [12, 121, -1, "30", 30.5, True, None])
+    def test_invalid_age(age):
+        with pytest.raises(ValueError, match="age"):
+>           validate_registration(valid(age=age))
+
+tests/test_reference_validation.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com', 'age': None}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+__________________________ test_missing_key[username] __________________________
+
+missing = 'username'
+
+    @pytest.mark.parametrize("missing", ["username", "email", "age"])
+    def test_missing_key(missing):
+        data = valid()
+        del data[missing]
+>       with pytest.raises(ValueError, match=missing):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'username'
+E         Actual message: 'Username is required'
+
+tests/test_reference_validation.py:59: AssertionError
+___________________________ test_missing_key[email] ____________________________
+
+missing = 'email'
+
+    @pytest.mark.parametrize("missing", ["username", "email", "age"])
+    def test_missing_key(missing):
+        data = valid()
+        del data[missing]
+        with pytest.raises(ValueError, match=missing):
+>           validate_registration(data)
+
+tests/test_reference_validation.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'age': 30}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+____________________________ test_missing_key[age] _____________________________
+
+missing = 'age'
+
+    @pytest.mark.parametrize("missing", ["username", "email", "age"])
+    def test_missing_key(missing):
+        data = valid()
+        del data[missing]
+        with pytest.raises(ValueError, match=missing):
+>           validate_registration(data)
+
+tests/test_reference_validation.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data = {'username': 'alice_1', 'email': 'alice@example.com'}
+
+    def validate_registration(data):
+        if not isinstance(data, dict):
+            raise TypeError('Input must be a dictionary')
+    
+        username = data.get('username', '').strip().lower()
+        email = data.get('email', '').strip().lower()
+        age = data.get('age', None)
+    
+        if not username:
+            raise ValueError('Username is required')
+        if len(username) < 3 or len(username) > 20:
+            raise ValueError('Username must be between 3 and 20 characters long')
+        if not username.isalnum():
+>           raise TypeError('Username must contain only alphanumeric characters')
+E           TypeError: Username must contain only alphanumeric characters
+
+app/validation.py:14: TypeError
+_____________________ test_first_invalid_field_is_reported _____________________
+
+    def test_first_invalid_field_is_reported():
+>       with pytest.raises(ValueError, match="username"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'username'
+E         Actual message: 'Username must be between 3 and 20 characters long'
+
+tests/test_reference_validation.py:64: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_reference_validation.py::test_normalises_valid_input - Type...
+FAILED tests/test_reference_validation.py::test_does_not_modify_the_input - T...
+FAILED tests/test_reference_validation.py::test_invalid_username[ab] - Assert...
+FAILED tests/test_reference_validation.py::test_invalid_username[aaaaaaaaaaaaaaaaaaaaa]
+FAILED tests/test_reference_validation.py::test_invalid_username[bad name] - ...
+FAILED tests/test_reference_validation.py::test_invalid_username[bad-name] - ...
+FAILED tests/test_reference_validation.py::test_invalid_username[] - Assertio...
+FAILED tests/test_reference_validation.py::test_invalid_username[   ] - Asser...
+FAILED tests/test_reference_validation.py::test_invalid_email[no-at-sign] - T...
+FAILED tests/test_reference_validation.py::test_invalid_email[a@@b.com] - Typ...
+FAILED tests/test_reference_validation.py::test_invalid_email[@b.com] - TypeE...
+FAILED tests/test_reference_validation.py::test_invalid_email[a@.com] - TypeE...
+FAILED tests/test_reference_validation.py::test_invalid_email[a@com.] - TypeE...
+FAILED tests/test_reference_validation.py::test_invalid_email[a@com] - TypeEr...
+FAILED tests/test_reference_validation.py::test_invalid_email[a@b@c.com] - Ty...
+FAILED tests/test_reference_validation.py::test_short_valid_email - TypeError...
+FAILED tests/test_reference_validation.py::test_age_boundaries_are_accepted[13]
+FAILED tests/test_reference_validation.py::test_age_boundaries_are_accepted[120]
+FAILED tests/test_reference_validation.py::test_invalid_age[12] - TypeError: ...
+FAILED tests/test_reference_validation.py::test_invalid_age[121] - TypeError:...
+FAILED tests/test_reference_validation.py::test_invalid_age[-1] - TypeError: ...
+FAILED tests/test_reference_validation.py::test_invalid_age[30] - TypeError: ...
+FAILED tests/test_reference_validation.py::test_invalid_age[30.5] - TypeError...
+FAILED tests/test_reference_validation.py::test_invalid_age[True] - TypeError...
+FAILED tests/test_reference_validation.py::test_invalid_age[None] - TypeError...
+FAILED tests/test_reference_validation.py::test_missing_key[username] - Asser...
+FAILED tests/test_reference_validation.py::test_missing_key[email] - TypeErro...
+FAILED tests/test_reference_validation.py::test_missing_key[age] - TypeError:...
+FAILED tests/test_reference_validation.py::test_first_invalid_field_is_reported
+29 failed, 6 passed in 4.00s

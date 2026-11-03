@@ -1,0 +1,61 @@
+33/35 passed, 2 failed, 0 errors
+
+tests.test_reference_validation::test_invalid_email[a@.com]
+Failed: DID NOT RAISE ValueError
+email = 'a@.com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_reference_validation.py:36: Failed
+
+tests.test_reference_validation::test_invalid_email[a@com]
+AssertionError: Regex pattern did not match.
+  Expected regex: re.compile('(?i)email', re.IGNORECASE)
+  Actual message: 'substring not found'
+email = 'a@com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'substring not found'
+
+tests/test_reference_validation.py:36: AssertionError
+
+--- output (tail) ---
+.............F.F...................                                      [100%]
+=================================== FAILURES ===================================
+__________________________ test_invalid_email[a@.com] __________________________
+
+email = 'a@.com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_reference_validation.py:36: Failed
+__________________________ test_invalid_email[a@com] ___________________________
+
+email = 'a@com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="(?i)email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: re.compile('(?i)email', re.IGNORECASE)
+E         Actual message: 'substring not found'
+
+tests/test_reference_validation.py:36: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_reference_validation.py::test_invalid_email[a@.com] - Faile...
+FAILED tests/test_reference_validation.py::test_invalid_email[a@com] - Assert...
+2 failed, 33 passed in 1.80s

@@ -1,0 +1,33 @@
+﻿benchmark run2-qwen7b-fixed: 6 task(s) x 2 system(s)
+  rest_api          multi_agent   reference 11/11 SOLVED  own 7/9  debug 3  107s  tokens 22922
+  rest_api          single_agent  reference 8/11  own 4/5  debug 0  19s  tokens 1442
+  input_validation  multi_agent   reference 12/35  own 0/1  debug 3  746s  tokens 78825
+.\.venv\Scripts\python.exe : WARNING:agentforge.llm:llm task=single_agent attempt=1 failed: ResponseError: prediction 
+aborted, token repeat limit reached (status code: -1)
+At line:1 char:769
++ ...  = "utf-8"; .\.venv\Scripts\python.exe ..\evals\scripts\run_benchmark ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING:agentfo...tatus code: -1):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+WARNING:agentforge.llm:llm task=single_agent attempt=2 failed: ResponseError: prediction aborted, token repeat limit 
+reached (status code: -1)
+  input_validation  single_agent  reference 12/35  own 8/10  debug 0  28s  tokens 1370
+WARNING:agentforge.llm:llm task=tester attempt=1 failed: ResponseError: prediction aborted, token repeat limit reached 
+(status code: -1)
+WARNING:agentforge.llm:llm task=tester attempt=2 failed: ResponseError: prediction aborted, token repeat limit reached 
+(status code: -1)
+  crud              multi_agent   reference 13/14  own 11/14  debug 3  178s  tokens 27296
+  crud              single_agent  reference 13/14  own 10/10  debug 0  22s  tokens 1591
+  fix_bug           multi_agent   reference 8/8 SOLVED  own 4/4  debug 1  43s  tokens 8694
+  fix_bug           single_agent  reference 8/8 SOLVED  own 4/4  debug 0  8s  tokens 840
+  write_tests       multi_agent   reference 11/11 SOLVED  own 4/4  debug 1  49s  tokens 9923
+  write_tests       single_agent  reference 0/1  own 0/1  debug 0  8s  tokens 738
+  add_auth          multi_agent   reference 0/1  own 0/1  debug 3  728s  tokens 73435
+  add_auth          single_agent  reference 1/9  own 1/12  debug 0  18s  tokens 1300
+
+summary
+  multi_agent   solved 3/6 (50%)  reference pass 71%  own suite green 33%  median 143s  tokens 221095  errors 0
+  single_agent  solved 1/6 (17%)  reference pass 52%  own suite green 33%  median 19s  tokens 7281  errors 0
+
+report: C:\Users\poorn\OneDrive\Desktop\Project_claude\evals\reports\run2-qwen7b-fixed.json

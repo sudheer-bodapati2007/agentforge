@@ -1,0 +1,10 @@
+﻿benchmark run1-qwen7b: 6 task(s) x 2 system(s)
+  rest_api          multi_agent   reference 11/11 SOLVED  own 0/1  debug 3  166s  tokens 21799
+  rest_api          single_agent  reference 9/11  own 4/6  debug 0  26s  tokens 1479
+  input_validation  multi_agent   reference 6/35  own 6/15  debug 3  130s  tokens 32772
+  input_validation  single_agent  reference 34/35  own 0/0  debug 0  3380s  tokens 164410
+  crud              multi_agent   reference 10/14  own 0/3  debug 3  105s  tokens 18474
+  crud              single_agent  reference 12/14  own 4/9  debug 0  19s  tokens 1528
+  fix_bug           multi_agent   reference 8/8 SOLVED  own 3/3  debug 0  30s  tokens 5888
+  fix_bug           single_agent  reference 8/8 SOLVED  own 2/3  debug 0  8s  tokens 827
+  write_tests       multi_agent   reference 7/11  own 3/3  debug 1  38s  tokens 6745

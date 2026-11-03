@@ -1,0 +1,430 @@
+{
+  "benchmark_id": "phase5-regression-qwen7b",
+  "generated_at": "2026-10-22T12:02:05.842917+00:00",
+  "complete": true,
+  "model": "ollama:qwen2.5-coder:7b",
+  "settings": {
+    "llm_provider": "ollama",
+    "llm_temperature": 0.2,
+    "max_debug_iterations": 3,
+    "max_review_corrections": 1
+  },
+  "summaries": [
+    {
+      "system": "multi_agent",
+      "tasks": 6,
+      "solved": 2,
+      "solve_rate": 0.3333333333333333,
+      "reference_pass_rate": 0.8352332852332852,
+      "own_suite_success_rate": 0.5,
+      "mean_debug_iterations": 2.0,
+      "median_latency_seconds": 131.078,
+      "total_input_tokens": 82756,
+      "total_output_tokens": 24632,
+      "total_cost_usd": 0.0,
+      "blocking_findings": 0,
+      "errors": 0
+    },
+    {
+      "system": "single_agent",
+      "tasks": 6,
+      "solved": 1,
+      "solve_rate": 0.16666666666666666,
+      "reference_pass_rate": 0.6334535834535835,
+      "own_suite_success_rate": 0.3333333333333333,
+      "mean_debug_iterations": 0.0,
+      "median_latency_seconds": 29.0315,
+      "total_input_tokens": 3174,
+      "total_output_tokens": 4394,
+      "total_cost_usd": 0.0,
+      "blocking_findings": 8,
+      "errors": 0
+    }
+  ],
+  "results": [
+    {
+      "benchmark_id": "phase5-regression-qwen7b",
+      "task_id": "rest_api",
+      "task_title": "Items REST API",
+      "category": "REST API",
+      "system": "multi_agent",
+      "model_name": "ollama:qwen2.5-coder:7b",
+      "demo_model": false,
+      "own_tests": {
+        "executed": true,
+        "passed": 3,
+        "total": 7,
+        "errors": 0
+      },
+      "reference_tests": {
+        "executed": true,
+        "passed": 8,
+        "total": 11,
+        "errors": 0
+      },
+      "debug_iterations": 3,
+      "test_runs": 4,
+      "findings_total": 2,
+      "blocking_findings": 0,
+      "latency_seconds": 155.125,
+      "input_tokens": 18651,
+      "output_tokens": 4678,
+      "estimated_cost_usd": 0.0,
+      "human_interventions": 0,
+      "error": null,
+      "solved": false
+    },
+    {
+      "benchmark_id": "phase5-regression-qwen7b",
+      "task_id": "rest_api",
+      "task_title": "Items REST API",
+      "category": "REST API",
+      "system": "single_agent",
+      "model_name": "ollama:qwen2.5-coder:7b",
+      "demo_model": false,
+      "own_tests": {
+        "executed": true,
+        "passed": 5,
+        "total": 7,
+        "errors": 0
+      },
+      "reference_tests": {
+        "executed": true,
+        "passed": 9,
+        "total": 11,
+        "errors": 0
+      },
+      "debug_iterations": 0,
+      "test_runs": 1,
+      "findings_total": 2,
+      "blocking_findings": 0,
+      "latency_seconds": 29.094,
+      "input_tokens": 525,
+      "output_tokens": 908,
+      "estimated_cost_usd": 0.0,
+      "human_interventions": 0,
+      "error": null,
+      "solved": false
+    },
+    {
+      "benchmark_id": "phase5-regression-qwen7b",
+      "task_id": "input_validation",
+      "task_title": "Registration input validation",
+      "category": "Input validation",
+      "system": "multi_agent",
+      "model_name": "ollama:qwen2.5-coder:7b",
+      "demo_model": false,
+      "own_tests": {
+        "executed": true,
+        "passed": 9,
+        "total": 9,
+        "errors": 0
+      },
+      "reference_tests": {
+        "executed": true,
+        "passed": 33,
+        "total": 35,
+        "errors": 0
+      },
+      "debug_iterations": 1,
+      "test_runs": 2,
+      "findings_total": 0,
+      "blocking_findings": 0,
+      "latency_seconds": 100.328,
+      "input_tokens": 10997,
+      "output_tokens": 3126,
+      "estimated_cost_usd": 0.0,
+      "human_interventions": 0,
+      "error": null,
+      "solved": false
+    },
+    {
+      "benchmark_id": "phase5-regression-qwen7b",
+      "task_id": "input_validation",
+      "task_title": "Registration input validation",
+      "category": "Input validation",
+      "system": "single_agent",
+      "model_name": "ollama:qwen2.5-coder:7b",
+      "demo_model": false,
+      "own_tests": {
+        "executed": true,
+        "passed": 1,
+        "total": 8,
+        "errors": 0
+      },
+      "reference_tests": {
+        "executed": true,
+        "passed": 33,
+        "total": 35,
+        "errors": 0
+      },
+      "debug_iterations": 0,
+      "test_runs": 1,
+      "findings_total": 7,
+      "blocking_findings": 7,
+      "latency_seconds": 35.813,
+      "input_tokens": 570,
+      "output_tokens": 1041,
+      "estimated_cost_usd": 0.0,
+      "human_interventions": 0,
+      "error": null,
+      "solved": false
+    },
+    {
+      "benchmark_id": "phase5-regression-qwen7b",
+      "task_id": "crud",
+      "task_title": "In-memory todo store (CRUD)",
+      "category": "CRUD",
+      "system": "multi_agent",
+      "model_name": "ollama:qwen2.5-coder:7b",
+      "demo_model": false,
+      "own_tests": {
+        "executed": true,
+        "passed": 16,
+        "total": 16,
+        "errors": 0
+      },
+      "reference_tests": {
+        "executed": true,
+        "passed": 11,
+        "total": 14,
+        "errors": 0
+      },
+      "debug_iterations": 2,
+      "test_runs": 3,
+      "findings_total": 0,
+      "blocking_findings": 0,
+      "latency_seconds": 155.344,
+      "input_tokens": 17477,
+      "output_tokens": 5157,
+      "estimated_cost_usd": 0.0,
+      "human_interventions": 0,
+      "error": null,
+      "solved": false
+    },
+    {
+      "benchmark_id": "phase5-regression-qwen7b",
+      "task_id": "crud",
+      "task_title": "In-memory todo store (CRUD)",
+      "category": "CRUD",
+      "system": "single_agent",
+      "model_name": "ollama:qwen2.5-coder:7b",
+      "demo_model": false,
+      "own_tests": {
+        "executed": true,
+        "passed": 10,
+        "total": 10,
+        "errors": 0
+      },
+      "reference_tests": {
+        "executed": true,
+        "passed": 13,
+        "total": 14,
+        "errors": 0
+      },
+      "debug_iterations": 0,
+      "test_runs": 1,
+      "findings_total": 4,
+      "blocking_findings": 0,
+      "latency_seconds": 32.703,
+      "input_tokens": 575,
+      "output_tokens": 924,
+      "estimated_cost_usd": 0.0,
+      "human_interventions": 0,
+      "error": null,
+      "solved": false
+    },
+    {
+      "benchmark_id": "phase5-regression-qwen7b",
+      "task_id": "fix_bug",
+      "task_title": "Fix a planted off-by-one bug",
+      "category": "Bug fix",
+      "system": "multi_agent",
+      "model_name": "ollama:qwen2.5-coder:7b",
+      "demo_model": false,
+      "own_tests": {
+        "executed": true,
+        "passed": 5,
+        "total": 5,
+        "errors": 0
+      },
+      "reference_tests": {
+        "executed": true,
+        "passed": 8,
+        "total": 8,
+        "errors": 0
+      },
+      "debug_iterations": 0,
+      "test_runs": 1,
+      "findings_total": 0,
+      "blocking_findings": 0,
+      "latency_seconds": 73.469,
+      "input_tokens": 5834,
+      "output_tokens": 2450,
+      "estimated_cost_usd": 0.0,
+      "human_interventions": 0,
+      "error": null,
+      "solved": true
+    },
+    {
+      "benchmark_id": "phase5-regression-qwen7b",
+      "task_id": "fix_bug",
+      "task_title": "Fix a planted off-by-one bug",
+      "category": "Bug fix",
+      "system": "single_agent",
+      "model_name": "ollama:qwen2.5-coder:7b",
+      "demo_model": false,
+      "own_tests": {
+        "executed": true,
+        "passed": 4,
+        "total": 4,
+        "errors": 0
+      },
+      "reference_tests": {
+        "executed": true,
+        "passed": 8,
+        "total": 8,
+        "errors": 0
+      },
+      "debug_iterations": 0,
+      "test_runs": 1,
+      "findings_total": 0,
+      "blocking_findings": 0,
+      "latency_seconds": 14.61,
+      "input_tokens": 482,
+      "output_tokens": 352,
+      "estimated_cost_usd": 0.0,
+      "human_interventions": 0,
+      "error": null,
+      "solved": true
+    },
+    {
+      "benchmark_id": "phase5-regression-qwen7b",
+      "task_id": "write_tests",
+      "task_title": "Write tests for an existing function",
+      "category": "Test writing",
+      "system": "multi_agent",
+      "model_name": "ollama:qwen2.5-coder:7b",
+      "demo_model": false,
+      "own_tests": {
+        "executed": true,
+        "passed": 5,
+        "total": 8,
+        "errors": 0
+      },
+      "reference_tests": {
+        "executed": true,
+        "passed": 11,
+        "total": 11,
+        "errors": 0
+      },
+      "debug_iterations": 3,
+      "test_runs": 4,
+      "findings_total": 0,
+      "blocking_findings": 0,
+      "latency_seconds": 107.031,
+      "input_tokens": 12164,
+      "output_tokens": 3670,
+      "estimated_cost_usd": 0.0,
+      "human_interventions": 0,
+      "error": null,
+      "solved": true
+    },
+    {
+      "benchmark_id": "phase5-regression-qwen7b",
+      "task_id": "write_tests",
+      "task_title": "Write tests for an existing function",
+      "category": "Test writing",
+      "system": "single_agent",
+      "model_name": "ollama:qwen2.5-coder:7b",
+      "demo_model": false,
+      "own_tests": {
+        "executed": true,
+        "passed": 0,
+        "total": 1,
+        "errors": 1
+      },
+      "reference_tests": {
+        "executed": true,
+        "passed": 0,
+        "total": 1,
+        "errors": 1
+      },
+      "debug_iterations": 0,
+      "test_runs": 1,
+      "findings_total": 45,
+      "blocking_findings": 0,
+      "latency_seconds": 12.454,
+      "input_tokens": 426,
+      "output_tokens": 312,
+      "estimated_cost_usd": 0.0,
+      "human_interventions": 0,
+      "error": null,
+      "solved": false
+    },
+    {
+      "benchmark_id": "phase5-regression-qwen7b",
+      "task_id": "add_auth",
+      "task_title": "Add API-key auth to a small app",
+      "category": "Security",
+      "system": "multi_agent",
+      "model_name": "ollama:qwen2.5-coder:7b",
+      "demo_model": false,
+      "own_tests": {
+        "executed": true,
+        "passed": 4,
+        "total": 9,
+        "errors": 0
+      },
+      "reference_tests": {
+        "executed": true,
+        "passed": 5,
+        "total": 9,
+        "errors": 0
+      },
+      "debug_iterations": 3,
+      "test_runs": 4,
+      "findings_total": 3,
+      "blocking_findings": 0,
+      "latency_seconds": 181.5,
+      "input_tokens": 17633,
+      "output_tokens": 5551,
+      "estimated_cost_usd": 0.0,
+      "human_interventions": 0,
+      "error": null,
+      "solved": false
+    },
+    {
+      "benchmark_id": "phase5-regression-qwen7b",
+      "task_id": "add_auth",
+      "task_title": "Add API-key auth to a small app",
+      "category": "Security",
+      "system": "single_agent",
+      "model_name": "ollama:qwen2.5-coder:7b",
+      "demo_model": false,
+      "own_tests": {
+        "executed": true,
+        "passed": 1,
+        "total": 7,
+        "errors": 0
+      },
+      "reference_tests": {
+        "executed": true,
+        "passed": 1,
+        "total": 9,
+        "errors": 0
+      },
+      "debug_iterations": 0,
+      "test_runs": 1,
+      "findings_total": 1,
+      "blocking_findings": 1,
+      "latency_seconds": 28.969,
+      "input_tokens": 596,
+      "output_tokens": 857,
+      "estimated_cost_usd": 0.0,
+      "human_interventions": 0,
+      "error": null,
+      "solved": false
+    }
+  ]
+}

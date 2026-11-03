@@ -1,0 +1,26 @@
+# Render Blueprint for the AgentForge API (free web service).
+# Secrets are declared with `sync: false`: Render asks for them in its dashboard,
+# so they never live in this repository.
+services:
+  - type: web
+    name: agentforge-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    # Migrations are idempotent; running them on each deploy keeps Supabase in sync.
+    startCommand: alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: ENVIRONMENT
+        value: production
+      - key: DATABASE_SSL_MODE
+        value: require
+      - key: DATABASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false

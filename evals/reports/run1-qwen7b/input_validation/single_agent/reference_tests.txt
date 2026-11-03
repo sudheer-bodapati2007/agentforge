@@ -1,0 +1,31 @@
+34/35 passed, 1 failed, 0 errors
+
+tests.test_reference_validation::test_invalid_email[a@.com]
+Failed: DID NOT RAISE ValueError
+email = 'a@.com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_reference_validation.py:36: Failed
+
+--- output (tail) ---
+.............F.....................                                      [100%]
+=================================== FAILURES ===================================
+__________________________ test_invalid_email[a@.com] __________________________
+
+email = 'a@.com'
+
+    @pytest.mark.parametrize("email", ["no-at-sign", "a@@b.com", "@b.com", "a@.com", "a@com.", "a@com", "a@b@c.com"])
+    def test_invalid_email(email):
+>       with pytest.raises(ValueError, match="email"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_reference_validation.py:36: Failed
+=========================== short test summary info ============================
+FAILED tests/test_reference_validation.py::test_invalid_email[a@.com] - Faile...
+1 failed, 34 passed in 0.16s

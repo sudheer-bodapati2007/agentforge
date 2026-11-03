@@ -1,0 +1,1 @@
+import re\n\ndef slugify(text: str) -> str:\n    if not isinstance(text, str):\n        raise TypeError("text must be a string")\n    slug = re.sub(r"[^a-z0-9]+", "-", text.lower())\n    return slug.strip("-")

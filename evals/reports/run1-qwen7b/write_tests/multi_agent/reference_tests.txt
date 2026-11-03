@@ -1,0 +1,239 @@
+7/11 passed, 4 failed, 0 errors
+
+tests.test_reference_slug::test_slugify[Hello, World!-hello-world]
+AssertionError: assert 'hello,-world!' == 'hello-world'
+  
+  - hello-world
+  + hello,-world!
+  ?      +      +
+text = 'Hello, World!', expected = 'hello-world'
+
+    @pytest.mark.parametrize(
+        "text, expected",
+        [
+            ("Hello, World!", "hello-world"),
+            ("  Many   spaces  ", "many-spaces"),
+            ("Already-slugged", "already-slugged"),
+            ("A1 b2", "a1-b2"),
+            ("Ünïcode", "n-code"),
+            ("under_score", "under-score"),
+            ("", ""),
+            ("---", ""),
+        ],
+    )
+    def test_slugify(text, expected):
+>       assert slugify(text) == expected
+E       AssertionError: assert 'hello,-world!' == 'hello-world'
+E         
+E         - hello-world
+E         + hello,-world!
+E         ?      +      +
+
+tests/test_reference_slug.py:23: AssertionError
+
+tests.test_reference_slug::test_slugify[\xdcn\xefcode-n-code]
+AssertionError: assert 'ünïcode' == 'n-code'
+  
+  - n-code
+  ?  ^
+  + ünïcode
+  ? + ^
+text = 'Ünïcode', expected = 'n-code'
+
+    @pytest.mark.parametrize(
+        "text, expected",
+        [
+            ("Hello, World!", "hello-world"),
+            ("  Many   spaces  ", "many-spaces"),
+            ("Already-slugged", "already-slugged"),
+            ("A1 b2", "a1-b2"),
+            ("Ünïcode", "n-code"),
+            ("under_score", "under-score"),
+            ("", ""),
+            ("---", ""),
+        ],
+    )
+    def test_slugify(text, expected):
+>       assert slugify(text) == expected
+E       AssertionError: assert 'ünïcode' == 'n-code'
+E         
+E         - n-code
+E         ?  ^
+E         + ünïcode
+E         ? + ^
+
+tests/test_reference_slug.py:23: AssertionError
+
+tests.test_reference_slug::test_slugify[under_score-under-score]
+AssertionError: assert 'under_score' == 'under-score'
+  
+  - under-score
+  ?      ^
+  + under_score
+  ?      ^
+text = 'under_score', expected = 'under-score'
+
+    @pytest.mark.parametrize(
+        "text, expected",
+        [
+            ("Hello, World!", "hello-world"),
+            ("  Many   spaces  ", "many-spaces"),
+            ("Already-slugged", "already-slugged"),
+            ("A1 b2", "a1-b2"),
+            ("Ünïcode", "n-code"),
+            ("under_score", "under-score"),
+            ("", ""),
+            ("---", ""),
+        ],
+    )
+    def test_slugify(text, expected):
+>       assert slugify(text) == expected
+E       AssertionError: assert 'under_score' == 'under-score'
+E         
+E         - under-score
+E         ?      ^
+E         + under_score
+E         ?      ^
+
+tests/test_reference_slug.py:23: AssertionError
+
+tests.test_reference_slug::test_slugify[----]
+AssertionError: assert '---' == ''
+  
+  + ---
+text = '---', expected = ''
+
+    @pytest.mark.parametrize(
+        "text, expected",
+        [
+            ("Hello, World!", "hello-world"),
+            ("  Many   spaces  ", "many-spaces"),
+            ("Already-slugged", "already-slugged"),
+            ("A1 b2", "a1-b2"),
+            ("Ünïcode", "n-code"),
+            ("under_score", "under-score"),
+            ("", ""),
+            ("---", ""),
+        ],
+    )
+    def test_slugify(text, expected):
+>       assert slugify(text) == expected
+E       AssertionError: assert '---' == ''
+E         
+E         + ---
+
+tests/test_reference_slug.py:23: AssertionError
+
+--- output (tail) ---
+F...FF.F...                                                              [100%]
+=================================== FAILURES ===================================
+___________________ test_slugify[Hello, World!-hello-world] ____________________
+
+text = 'Hello, World!', expected = 'hello-world'
+
+    @pytest.mark.parametrize(
+        "text, expected",
+        [
+            ("Hello, World!", "hello-world"),
+            ("  Many   spaces  ", "many-spaces"),
+            ("Already-slugged", "already-slugged"),
+            ("A1 b2", "a1-b2"),
+            ("Ünïcode", "n-code"),
+            ("under_score", "under-score"),
+            ("", ""),
+            ("---", ""),
+        ],
+    )
+    def test_slugify(text, expected):
+>       assert slugify(text) == expected
+E       AssertionError: assert 'hello,-world!' == 'hello-world'
+E         
+E         - hello-world
+E         + hello,-world!
+E         ?      +      +
+
+tests/test_reference_slug.py:23: AssertionError
+______________________ test_slugify[\xdcn\xefcode-n-code] ______________________
+
+text = 'Ünïcode', expected = 'n-code'
+
+    @pytest.mark.parametrize(
+        "text, expected",
+        [
+            ("Hello, World!", "hello-world"),
+            ("  Many   spaces  ", "many-spaces"),
+            ("Already-slugged", "already-slugged"),
+            ("A1 b2", "a1-b2"),
+            ("Ünïcode", "n-code"),
+            ("under_score", "under-score"),
+            ("", ""),
+            ("---", ""),
+        ],
+    )
+    def test_slugify(text, expected):
+>       assert slugify(text) == expected
+E       AssertionError: assert 'ünïcode' == 'n-code'
+E         
+E         - n-code
+E         ?  ^
+E         + ünïcode
+E         ? + ^
+
+tests/test_reference_slug.py:23: AssertionError
+____________________ test_slugify[under_score-under-score] _____________________
+
+text = 'under_score', expected = 'under-score'
+
+    @pytest.mark.parametrize(
+        "text, expected",
+        [
+            ("Hello, World!", "hello-world"),
+            ("  Many   spaces  ", "many-spaces"),
+            ("Already-slugged", "already-slugged"),
+            ("A1 b2", "a1-b2"),
+            ("Ünïcode", "n-code"),
+            ("under_score", "under-score"),
+            ("", ""),
+            ("---", ""),
+        ],
+    )
+    def test_slugify(text, expected):
+>       assert slugify(text) == expected
+E       AssertionError: assert 'under_score' == 'under-score'
+E         
+E         - under-score
+E         ?      ^
+E         + under_score
+E         ?      ^
+
+tests/test_reference_slug.py:23: AssertionError
+______________________________ test_slugify[----] ______________________________
+
+text = '---', expected = ''
+
+    @pytest.mark.parametrize(
+        "text, expected",
+        [
+            ("Hello, World!", "hello-world"),
+            ("  Many   spaces  ", "many-spaces"),
+            ("Already-slugged", "already-slugged"),
+            ("A1 b2", "a1-b2"),
+            ("Ünïcode", "n-code"),
+            ("under_score", "under-score"),
+            ("", ""),
+            ("---", ""),
+        ],
+    )
+    def test_slugify(text, expected):
+>       assert slugify(text) == expected
+E       AssertionError: assert '---' == ''
+E         
+E         + ---
+
+tests/test_reference_slug.py:23: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_reference_slug.py::test_slugify[Hello, World!-hello-world]
+FAILED tests/test_reference_slug.py::test_slugify[\xdcn\xefcode-n-code] - Ass...
+FAILED tests/test_reference_slug.py::test_slugify[under_score-under-score] - ...
+FAILED tests/test_reference_slug.py::test_slugify[----] - AssertionError: ass...
+4 failed, 7 passed in 0.14s

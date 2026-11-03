@@ -1,0 +1,146 @@
+{
+  "generated_at": "2026-10-22T11:03:14.413313+00:00",
+  "embedder": "ollama:nomic-embed-text",
+  "k": 5,
+  "min_score": 0.15,
+  "corpus": {
+    "documents": 9,
+    "chunks": 47
+  },
+  "queries": 36,
+  "results": [
+    {
+      "configuration": "dense",
+      "mode": "dense",
+      "reranker": null,
+      "cases": 36,
+      "hit_at_1": 0.9375,
+      "hit_at_3": 1.0,
+      "hit_at_k": 1.0,
+      "mrr": 0.9688,
+      "negative_rejection": 0.0,
+      "by_category": {
+        "code": 1.0,
+        "keyword": 1.0,
+        "negative": 0.0,
+        "paraphrase": 1.0
+      },
+      "misses": [
+        "[negative] 'how do I configure the Kubernetes horizontal pod autoscaler' -> security.md",
+        "[negative] 'what is the parental leave policy' -> glossary.txt",
+        "[negative] 'GraphQL schema stitching for federated gateways' -> database.md",
+        "[negative] 'recipe for sourdough bread' -> orders_service.py"
+      ]
+    },
+    {
+      "configuration": "sparse (BM25)",
+      "mode": "sparse",
+      "reranker": null,
+      "cases": 36,
+      "hit_at_1": 0.8125,
+      "hit_at_3": 0.9688,
+      "hit_at_k": 0.9688,
+      "mrr": 0.8802,
+      "negative_rejection": 0.5,
+      "by_category": {
+        "code": 1.0,
+        "keyword": 1.0,
+        "negative": 0.5,
+        "paraphrase": 0.9333
+      },
+      "misses": [
+        "[paraphrase] 'how many items can a client ask for in one page at most' expected api-guidelines.md -> glossary.txt",
+        "[negative] 'what is the parental leave policy' -> database.md",
+        "[negative] 'GraphQL schema stitching for federated gateways' -> database.md"
+      ]
+    },
+    {
+      "configuration": "hybrid (RRF)",
+      "mode": "hybrid",
+      "reranker": null,
+      "cases": 36,
+      "hit_at_1": 0.875,
+      "hit_at_3": 1.0,
+      "hit_at_k": 1.0,
+      "mrr": 0.9323,
+      "negative_rejection": 0.0,
+      "by_category": {
+        "code": 1.0,
+        "keyword": 1.0,
+        "negative": 0.0,
+        "paraphrase": 1.0
+      },
+      "misses": [
+        "[negative] 'how do I configure the Kubernetes horizontal pod autoscaler' -> security.md",
+        "[negative] 'what is the parental leave policy' -> database.md",
+        "[negative] 'GraphQL schema stitching for federated gateways' -> database.md",
+        "[negative] 'recipe for sourdough bread' -> orders_service.py"
+      ]
+    },
+    {
+      "configuration": "dense + lexical rerank",
+      "mode": "dense",
+      "reranker": "lexical",
+      "cases": 36,
+      "hit_at_1": 0.8438,
+      "hit_at_3": 0.9375,
+      "hit_at_k": 0.9375,
+      "mrr": 0.8906,
+      "negative_rejection": 0.75,
+      "by_category": {
+        "code": 1.0,
+        "keyword": 1.0,
+        "negative": 0.75,
+        "paraphrase": 0.8667
+      },
+      "misses": [
+        "[paraphrase] 'how many items can a client ask for in one page at most' expected api-guidelines.md -> nothing",
+        "[paraphrase] 'is it ok to remove a customer record permanently' expected database.md -> nothing",
+        "[negative] 'what is the parental leave policy' -> database.md"
+      ]
+    },
+    {
+      "configuration": "hybrid + lexical rerank",
+      "mode": "hybrid",
+      "reranker": "lexical",
+      "cases": 36,
+      "hit_at_1": 0.8438,
+      "hit_at_3": 0.9375,
+      "hit_at_k": 0.9688,
+      "mrr": 0.8932,
+      "negative_rejection": 0.75,
+      "by_category": {
+        "code": 1.0,
+        "keyword": 1.0,
+        "negative": 0.75,
+        "paraphrase": 0.9333
+      },
+      "misses": [
+        "[paraphrase] 'is it ok to remove a customer record permanently' expected database.md -> nothing",
+        "[negative] 'what is the parental leave policy' -> database.md"
+      ]
+    },
+    {
+      "configuration": "hybrid + LLM rerank",
+      "mode": "hybrid",
+      "reranker": "llm",
+      "cases": 36,
+      "hit_at_1": 0.875,
+      "hit_at_3": 0.9062,
+      "hit_at_k": 0.9062,
+      "mrr": 0.8906,
+      "negative_rejection": 1.0,
+      "by_category": {
+        "code": 1.0,
+        "keyword": 0.9286,
+        "negative": 1.0,
+        "paraphrase": 0.8667
+      },
+      "misses": [
+        "[keyword] 'RMA return window' expected glossary.txt -> nothing",
+        "[paraphrase] 'is it ok to remove a customer record permanently' expected database.md -> nothing",
+        "[paraphrase] 'how much tax do we charge at checkout' expected orders_service.py -> nothing"
+      ]
+    }
+  ]
+}

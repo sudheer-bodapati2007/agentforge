@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "tasks": [
+    {
+      "id": "rest_api",
+      "title": "Items REST API",
+      "category": "REST API",
+      "prompt": "tasks/rest_api/prompt.md",
+      "reference_tests": ["tasks/rest_api/test_reference_rest_api.py"]
+    },
+    {
+      "id": "input_validation",
+      "title": "Registration input validation",
+      "category": "Input validation",
+      "prompt": "tasks/input_validation/prompt.md",
+      "reference_tests": ["tasks/input_validation/test_reference_validation.py"]
+    },
+    {
+      "id": "crud",
+      "title": "In-memory todo store (CRUD)",
+      "category": "CRUD",
+      "prompt": "tasks/crud/prompt.md",
+      "reference_tests": ["tasks/crud/test_reference_todos.py"]
+    },
+    {
+      "id": "fix_bug",
+      "title": "Fix a planted off-by-one bug",
+      "category": "Bug fix",
+      "prompt": "tasks/fix_bug/prompt.md",
+      "reference_tests": ["tasks/fix_bug/test_reference_stats.py"]
+    },
+    {
+      "id": "write_tests",
+      "title": "Write tests for an existing function",
+      "category": "Test writing",
+      "prompt": "tasks/write_tests/prompt.md",
+      "reference_tests": ["tasks/write_tests/test_reference_slug.py"]
+    },
+    {
+      "id": "add_auth",
+      "title": "Add API-key auth to a small app",
+      "category": "Security",
+      "prompt": "tasks/add_auth/prompt.md",
+      "reference_tests": ["tasks/add_auth/test_reference_auth.py"]
+    },
+    {
+      "id": "db_schema",
+      "title": "Library catalogue on PostgreSQL",
+      "category": "Database",
+      "prompt": "tasks/db_schema/prompt.md",
+      "reference_tests": ["tasks/db_schema/test_reference_library.py"],
+      "database": true
+    }
+  ]
+}

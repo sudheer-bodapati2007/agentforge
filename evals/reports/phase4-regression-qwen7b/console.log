@@ -1,0 +1,27 @@
+﻿benchmark phase4-regression-qwen7b: 6 task(s) x 2 system(s)
+  rest_api          multi_agent   reference 11/11 SOLVED  own 5/7  debug 3  203s  tokens 25383
+  rest_api          single_agent  reference 3/11  own 1/5  debug 0  30s  tokens 1424
+  input_validation  multi_agent   reference 33/35  own 4/5  debug 3  108s  tokens 17300
+  input_validation  single_agent  reference 12/35  own 2/8  debug 0  28s  tokens 1620
+  crud              multi_agent   reference 13/14  own 10/10  debug 1  110s  tokens 17191
+  crud              single_agent  reference 13/14  own 10/10  debug 0  27s  tokens 1493
+  fix_bug           multi_agent   reference 8/8 SOLVED  own 5/5  debug 0  64s  tokens 7675
+  fix_bug           single_agent  reference 8/8 SOLVED  own 3/3  debug 0  14s  tokens 774
+  write_tests       multi_agent   reference 11/11 SOLVED  own 4/4  debug 0  56s  tokens 7499
+  write_tests       single_agent  reference 0/1  own 0/1  debug 0  15s  tokens 813
+.\.venv\Scripts\python.exe : WARNING:agentforge.llm:llm task=tester attempt=1 failed: ResponseError: prediction 
+aborted, token repeat limit reached (status code: -1)
+At line:1 char:406
++ ...  = "utf-8"; .\.venv\Scripts\python.exe ..\evals\scripts\run_benchmark ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING:agentfo...tatus code: -1):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  add_auth          multi_agent   reference 0/1  own 0/1  debug 3  313s  tokens 42381
+  add_auth          single_agent  reference 1/9  own 0/5  debug 0  19s  tokens 1239
+
+summary
+  multi_agent   solved 3/6 (50%)  reference pass 81%  own suite green 50%  median 109s  tokens 117429  errors 0
+  single_agent  solved 1/6 (17%)  reference pass 44%  own suite green 33%  median 23s  tokens 7363  errors 0
+
+report: C:\Users\poorn\OneDrive\Desktop\Project_claude\evals\reports\phase4-regression-qwen7b.json

@@ -1,0 +1,14 @@
+Orderly glossary
+
+SKU: stock keeping unit, the identifier of one sellable product variant, for example a shirt in
+one size and colour.
+
+Backorder: an order line accepted while the item is out of stock; it ships when new stock arrives.
+
+Fulfilment: picking, packing and shipping an order from one of the warehouses.
+
+RMA: return merchandise authorisation, the approval a customer needs before sending an item back.
+Returns are accepted within 30 days of delivery.
+
+Split shipment: one order delivered in several parcels because its items come from different
+warehouses.

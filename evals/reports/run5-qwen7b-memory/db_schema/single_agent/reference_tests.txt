@@ -1,0 +1,47 @@
+0/1 passed, 0 failed, 1 errors
+
+tests.test_reference_library
+collection failure
+tests/test_reference_library.py:11: in <module>
+    from app.library import add_author, add_book, books_by, delete_author
+app/library.py:11: in <module>
+    class Author(Base):
+app/library.py:14: in Author
+    name = Column(String, required=True, unique=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/schema.py:2456: in __init__
+    self._extra_kwargs(**dialect_kwargs)
+/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/schema.py:2538: in _extra_kwargs
+    self._validate_dialect_kwargs(kwargs)
+/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/base.py:844: in _validate_dialect_kwargs
+    raise TypeError(
+E   TypeError: Additional arguments should be named <dialectname>_<argument>, got 'required'
+
+--- output (tail) ---
+
+==================================== ERRORS ====================================
+_______________ ERROR collecting tests/test_reference_library.py _______________
+tests/test_reference_library.py:11: in <module>
+    from app.library import add_author, add_book, books_by, delete_author
+app/library.py:11: in <module>
+    class Author(Base):
+app/library.py:14: in Author
+    name = Column(String, required=True, unique=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/schema.py:2456: in __init__
+    self._extra_kwargs(**dialect_kwargs)
+/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/schema.py:2538: in _extra_kwargs
+    self._validate_dialect_kwargs(kwargs)
+/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/base.py:844: in _validate_dialect_kwargs
+    raise TypeError(
+E   TypeError: Additional arguments should be named <dialectname>_<argument>, got 'required'
+=============================== warnings summary ===============================
+app/library.py:9
+  /workspace/app/library.py:9: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    Base = declarative_base()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+ERROR tests/test_reference_library.py - TypeError: Additional arguments shoul...
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 warning, 1 error in 0.99s

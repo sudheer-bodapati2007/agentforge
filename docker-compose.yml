@@ -1,0 +1,55 @@
+# Local development stack. `docker compose up -d db` is enough for running the
+# backend and frontend natively; `docker compose up --build` runs everything.
+services:
+  db:
+    # pgvector image so Phase 4 (RAG) can use the same database without a new service.
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-agentforge}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-agentforge}
+      POSTGRES_DB: ${POSTGRES_DB:-agentforge}
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ../docker/backend.Dockerfile
+    environment:
+      # Set COMPOSE_DATABASE_URL to a Supabase connection string to use Supabase instead
+      # of the bundled `db` service (DATABASE_URL in .env is for natively-run processes).
+      DATABASE_URL: ${COMPOSE_DATABASE_URL:-postgresql+psycopg://${POSTGRES_USER:-agentforge}:${POSTGRES_PASSWORD:-agentforge}@db:5432/${POSTGRES_DB:-agentforge}}
+      DATABASE_SSL_MODE: ${DATABASE_SSL_MODE:-}
+      DATABASE_POOLER_MODE: ${DATABASE_POOLER_MODE:-auto}
+      CORS_ORIGINS: '["http://localhost:5173"]'
+      SUPABASE_URL: ${SUPABASE_URL:-}
+      LLM_PROVIDER: ${LLM_PROVIDER:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../docker/frontend.Dockerfile
+      args:
+        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL:-}
+        VITE_SUPABASE_PUBLISHABLE_KEY: ${VITE_SUPABASE_PUBLISHABLE_KEY:-}
+    ports:
+      - "127.0.0.1:5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:

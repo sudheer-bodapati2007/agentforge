@@ -1,0 +1,78 @@
+12/14 passed, 2 failed, 0 errors
+
+tests.test_reference_todos::test_blank_title_on_update_keeps_old_title
+AssertionError: assert '' == 'keep'
+  
+  - keep
+def test_blank_title_on_update_keeps_old_title():
+        store = TodoStore()
+        todo = store.add("keep")
+        with pytest.raises(ValueError):
+            store.update(todo["id"], title="  ")
+>       assert store.get(todo["id"])["title"] == "keep"
+E       AssertionError: assert '' == 'keep'
+E         
+E         - keep
+
+tests/test_reference_todos.py:75: AssertionError
+
+tests.test_reference_todos::test_returned_dicts_are_copies
+AssertionError: assert {'id': 1, 'ti...'done': False} == {'id': 1, 'ti...'done': False}
+  
+  Omitting 2 identical items, use -vv to show
+  Differing items:
+  {'title': 'also changed'} != {'title': 'original'}
+  Use -v to get more diff
+def test_returned_dicts_are_copies():
+        store = TodoStore()
+        todo = store.add("original")
+        todo["title"] = "changed"
+        store.get(1)["done"] = True
+        store.list()[0]["title"] = "also changed"
+>       assert store.get(1) == {"id": 1, "title": "original", "done": False}
+E       AssertionError: assert {'id': 1, 'ti...'done': False} == {'id': 1, 'ti...'done': False}
+E         
+E         Omitting 2 identical items, use -vv to show
+E         Differing items:
+E         {'title': 'also changed'} != {'title': 'original'}
+E         Use -v to get more diff
+
+tests/test_reference_todos.py:84: AssertionError
+
+--- output (tail) ---
+............FF                                                           [100%]
+=================================== FAILURES ===================================
+__________________ test_blank_title_on_update_keeps_old_title __________________
+
+    def test_blank_title_on_update_keeps_old_title():
+        store = TodoStore()
+        todo = store.add("keep")
+        with pytest.raises(ValueError):
+            store.update(todo["id"], title="  ")
+>       assert store.get(todo["id"])["title"] == "keep"
+E       AssertionError: assert '' == 'keep'
+E         
+E         - keep
+
+tests/test_reference_todos.py:75: AssertionError
+________________________ test_returned_dicts_are_copies ________________________
+
+    def test_returned_dicts_are_copies():
+        store = TodoStore()
+        todo = store.add("original")
+        todo["title"] = "changed"
+        store.get(1)["done"] = True
+        store.list()[0]["title"] = "also changed"
+>       assert store.get(1) == {"id": 1, "title": "original", "done": False}
+E       AssertionError: assert {'id': 1, 'ti...'done': False} == {'id': 1, 'ti...'done': False}
+E         
+E         Omitting 2 identical items, use -vv to show
+E         Differing items:
+E         {'title': 'also changed'} != {'title': 'original'}
+E         Use -v to get more diff
+
+tests/test_reference_todos.py:84: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_reference_todos.py::test_blank_title_on_update_keeps_old_title
+FAILED tests/test_reference_todos.py::test_returned_dicts_are_copies - Assert...
+2 failed, 12 passed in 0.12s

@@ -1,0 +1,35 @@
+﻿benchmark run5-qwen7b-memory: 7 task(s) x 2 system(s)
+  rest_api          multi_agent   reference 11/11 SOLVED  own 5/7  debug 3  152s  tokens 33120
+  rest_api          single_agent  reference 9/11  own 3/5  debug 0  28s  tokens 1542
+  input_validation  multi_agent   reference 33/35  own 8/9  debug 3  134s  tokens 31258
+.\.venv\Scripts\python.exe : WARNING:agentforge.llm:llm task=single_agent attempt=1 failed: ResponseError: prediction 
+aborted, token repeat limit reached (status code: -1)
+At line:1 char:836
++ ...  = "utf-8"; .\.venv\Scripts\python.exe ..\evals\scripts\run_benchmark ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING:agentfo...tatus code: -1):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+WARNING:agentforge.llm:llm task=single_agent attempt=2 failed: ResponseError: prediction aborted, token repeat limit 
+reached (status code: -1)
+WARNING:agentforge.llm:llm task=single_agent attempt=3 failed: ResponseError: prediction aborted, token repeat limit 
+reached (status code: -1)
+WARNING:agentforge.evaluation:task=input_validation system=single_agent failed: The single_agent agent did not get a 
+valid response after 3 attempts (ResponseError: prediction aborted, token repeat limit reached (status code: -1))
+  input_validation  single_agent  reference 0/1  own 0/—  debug 0  25s  tokens 0  ERROR: The single_agent agent did not get a valid response after 3 attempts (ResponseError: prediction aborted, token repeat li
+  crud              multi_agent   reference 13/14  own 10/10  debug 1  110s  tokens 18015
+  crud              single_agent  reference 12/14  own 8/9  debug 0  25s  tokens 1506
+  fix_bug           multi_agent   reference 8/8 SOLVED  own 3/3  debug 0  42s  tokens 6899
+  fix_bug           single_agent  reference 8/8 SOLVED  own 3/3  debug 0  9s  tokens 783
+  write_tests       multi_agent   reference 11/11 SOLVED  own 5/5  debug 0  49s  tokens 7565
+  write_tests       single_agent  reference 0/1  own 0/1  debug 0  219s  tokens 8637
+  add_auth          multi_agent   reference 1/9  own 1/7  debug 3  127s  tokens 28422
+  add_auth          single_agent  reference 1/9  own 1/7  debug 0  22s  tokens 1361
+  db_schema         multi_agent   reference 14/14 SOLVED  own 1/4  debug 3  177s  tokens 49087
+  db_schema         single_agent  reference 0/1  own 0/1  debug 0  35s  tokens 1919
+
+summary
+  multi_agent   solved 4/7 (57%)  reference pass 85%  own suite green 43%  median 127s  tokens 174366  errors 0
+  single_agent  solved 1/7 (14%)  reference pass 40%  own suite green 17%  median 25s  tokens 15748  errors 1
+
+report: C:\Users\poorn\OneDrive\Desktop\Project_claude\evals\reports\run5-qwen7b-memory.json

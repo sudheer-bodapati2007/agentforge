@@ -1,0 +1,36 @@
+{"query": "maximum limit for pagination page size", "category": "keyword", "source": "api-guidelines.md", "contains": "largest allowed limit is 200"}
+{"query": "Idempotency-Key header duplicate orders", "category": "keyword", "source": "api-guidelines.md", "contains": "Idempotency-Key"}
+{"query": "status code for validation failure", "category": "keyword", "source": "api-guidelines.md", "contains": "Validation failures return 422"}
+{"query": "Argon2id password hashing", "category": "keyword", "source": "security.md", "contains": "Argon2id"}
+{"query": "line coverage threshold in CI", "category": "keyword", "source": "testing.md", "contains": "85 percent"}
+{"query": "SELECT FOR UPDATE SKIP LOCKED queue workers", "category": "keyword", "source": "database.md", "contains": "SKIP LOCKED"}
+{"query": "connection pool size per service instance", "category": "keyword", "source": "database.md", "contains": "at most 10 connections"}
+{"query": "SALES_TAX_RATE", "category": "keyword", "source": "orders_service.py", "contains": "SALES_TAX_RATE = 0.08"}
+{"query": "with_retries exponential backoff", "category": "keyword", "source": "orders_service.py", "contains": "def with_retries"}
+{"query": "Retry-After header rate limit", "category": "keyword", "source": "api-guidelines.md", "contains": "600 requests per minute"}
+{"query": "JWT access token lifetime", "category": "keyword", "source": "security.md", "contains": "15 minutes"}
+{"query": "readiness check load balancer", "category": "keyword", "source": "deployment.md", "contains": "three failed readiness checks"}
+{"query": "SEV1 incident paging", "category": "keyword", "source": "incident-runbook.md", "contains": "SEV1"}
+{"query": "RMA return window", "category": "keyword", "source": "glossary.txt", "contains": "within 30 days of delivery"}
+{"query": "how many items can a client ask for in one page at most", "category": "paraphrase", "source": "api-guidelines.md", "contains": "largest allowed limit is 200"}
+{"query": "can we ship code to production on a Friday afternoon", "category": "paraphrase", "source": "deployment.md", "contains": "no Friday deploys"}
+{"query": "what happens when the same create request is sent twice", "category": "paraphrase", "source": "api-guidelines.md", "contains": "returns the original response"}
+{"query": "how should I store user passwords safely", "category": "paraphrase", "source": "security.md", "contains": "Argon2id"}
+{"query": "is it ok to remove a customer record permanently", "category": "paraphrase", "source": "database.md", "contains": "never physically deleted"}
+{"query": "how much tax do we charge at checkout", "category": "paraphrase", "source": "orders_service.py", "contains": "SALES_TAX_RATE = 0.08"}
+{"query": "until when can a buyer still cancel what they ordered", "category": "paraphrase", "source": "orders_service.py", "contains": "within 30 minutes"}
+{"query": "how do I undo a bad release", "category": "paraphrase", "source": "deployment.md", "contains": "rolled back"}
+{"query": "what does it mean when an item is sold while out of stock", "category": "paraphrase", "source": "glossary.txt", "contains": "Backorder"}
+{"query": "where do API keys and database credentials come from", "category": "paraphrase", "source": "security.md", "contains": "secret manager"}
+{"query": "how fast must the person on call respond to an alert", "category": "paraphrase", "source": "incident-runbook.md", "contains": "within 5 minutes"}
+{"query": "tests that sometimes pass and sometimes fail", "category": "paraphrase", "source": "testing.md", "contains": "quarantined"}
+{"query": "how to make tests that depend on today's date deterministic", "category": "paraphrase", "source": "testing.md", "contains": "frozen clock"}
+{"query": "which websites are allowed to call the API from a browser", "category": "paraphrase", "source": "security.md", "contains": "dashboard origins"}
+{"query": "how are breaking API changes released", "category": "paraphrase", "source": "api-guidelines.md", "contains": "new version"}
+{"query": "function that computes the order total including shipping", "category": "code", "source": "orders_service.py", "contains": "def calculate_order_total"}
+{"query": "discount code SAVE10", "category": "code", "source": "orders_service.py", "contains": "SAVE10"}
+{"query": "free shipping threshold amount", "category": "code", "source": "orders_service.py", "contains": "FREE_SHIPPING_THRESHOLD = 50.00"}
+{"query": "how do I configure the Kubernetes horizontal pod autoscaler", "category": "negative"}
+{"query": "what is the parental leave policy", "category": "negative"}
+{"query": "GraphQL schema stitching for federated gateways", "category": "negative"}
+{"query": "recipe for sourdough bread", "category": "negative"}

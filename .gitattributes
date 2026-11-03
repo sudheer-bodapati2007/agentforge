@@ -1,0 +1,4 @@
+# Store text files with LF in the repo (deploy targets are Linux).
+* text=auto eol=lf
+*.png binary
+*.ico binary
